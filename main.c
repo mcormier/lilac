@@ -31,8 +31,8 @@ int main ( int argc, const char * argv[] ) {
     return 0;
 }
 
-#define TOTALBYTES    8192
-#define BYTEINCREMENT 4096
+
+// TODO -- create get browser exe method
 void openURLinBrowser( char* url ) {
 
 
