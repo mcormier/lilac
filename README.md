@@ -2,6 +2,13 @@
 Experimenting with Core Foundation and Objective C 
 on Windoze.
 
+This project will eventually create an exe on windows that
+can be used open a .webloc file in the default Windows by double clicking on 
+it.
+
+
+
+
 -----------------------------------------------------------------------
 The cocotron project has been used as reference material.
 http://www.cocotron.com/

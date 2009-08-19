@@ -4,17 +4,23 @@ const char* value = "\"C:\\Users\\Matthieu.Cormier\\AppData\\Local\\Google\\Chro
 // CFStringCreateArrayBySeparatingStrings
 
 #import <objc/Object.h>
+#import <objc/NXConstStr.h>
 #import "NSString.h"
+#import "NSArray.h"
 
 int main ( int argc, const char * argv[] ) {
-  printf("Value --> %s\n", value);
 
-  id hello;
+  NSString *regValue = [[NSString alloc] initWithCString: value encoding:NSISOLatin1StringEncoding];
+  [regValue print];
 
-  //hello = [[NSString alloc] init];
-  hello = [[NSString alloc] initWithCString: value encoding:NSISOLatin1StringEncoding];
-  [hello world];
-  [hello release];
+  NSString *sepValue = [[NSString alloc] initWithCString:"\"" encoding:NSISOLatin1StringEncoding];
+
+  NSArray *array = [regValue componentsSeparatedByString:sepValue];
+  int count = [array count];
+  printf("the count is %i \n", count);
+
+  [regValue release];
+  [sepValue release];
 
   return 0;
 }

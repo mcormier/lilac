@@ -1,21 +1,53 @@
 #import "NSString.h"
+#import "NSArray.h"
 
 @implementation NSString
 
+
+- (id)init {
+
+  if ( self = [super init] ) {
+  }
+
+  return self;
+
+}
+
 - (id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
-  // TODO -- throw an exception if the encoding isn't tested/supported.
-  
+
+  if ( [self init] ) {
+    value = CFStringCreateWithCString(NULL, nullTerminatedCString, encoding);
+  } 
+
   return self;
 }
 
--(void)world {
-  printf("Hello World!\n");
+-(void)print {
+   // TODO -- magic number + hard limit..
+   char url[2048];
+    Boolean success = CFStringGetCString(value, url, 2048, kCFStringEncodingWindowsLatin1);
+    // TODO -- check success value.
+    printf( "The value is : %s \n", url );
 }
 
-// TODO -- this should go in an NSObject class.
-- (oneway void)release {
-  [self free];
-  self = nil;
+- (NSArray *)componentsSeparatedByString:(NSString *)separator {
+  CFArrayRef array = CFStringCreateArrayBySeparatingStrings(NULL, value, separator->value); 
+
+  if ( array ) {
+    NSArray *toReturn = [[NSArray alloc] initWithCFArray:array];
+    return toReturn;
+  } 
+
+  return NULL;
+}
+
+
+-(const char *) cString {
+  return "";
+}
+
+-(unsigned int) length {
+  return 0;
 }
 
 @end

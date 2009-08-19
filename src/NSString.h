@@ -1,4 +1,8 @@
 #import <objc/Object.h>
+#import "CFLite.h"
+#import "NSObject.h"
+
+@class NSArray;
 
 typedef enum {
    NSASCIIStringEncoding=1,
@@ -26,13 +30,17 @@ typedef enum {
    NSUTF32LittleEndianStringEncoding=0x9c000100,
 } NSStringEncoding;
 
-@interface NSString : Object {
-
+@interface NSString : NSObject {
+  CFStringRef value; 
 }
 
--(id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
--(oneway void)release;
+-(const char *) cString;
+-(unsigned int) length;
 
--(void)world;
+-(id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
+- (NSArray *)componentsSeparatedByString:(NSString *)separator;
+
+-(void)print;
 
 @end
+
