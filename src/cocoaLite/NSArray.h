@@ -1,8 +1,5 @@
-#import <objc/Object.h>
-
-#import "Lilac.h"
-#import "CFLite.h"
 #import "NSObject.h"
+#import "NSObjCRuntime.h"
 
 @interface NSArray : NSObject {
   CFArrayRef value;  

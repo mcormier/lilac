@@ -2,9 +2,7 @@
 const char* value = "\"C:\\Users\\Matthieu.Cormier\\AppData\\Local\\Google\\Chrome\\Application\\chrome.exe\" -- \"%1\"";
 
 #import <objc/Object.h>
-#import "NSString.h"
-#import "NSArray.h"
-#import "NSConstantString.h"
+#import "cocoaLite/Cocoa.h"
 
 int main ( int argc, const char * argv[] ) {
 

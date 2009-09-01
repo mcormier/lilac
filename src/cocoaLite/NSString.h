@@ -1,7 +1,5 @@
-#import <objc/Object.h>
-#import "Lilac.h"
-#import "CFLite.h"
 #import "NSObject.h"
+#import "NSObjCRuntime.h"
 
 @class NSArray;
 
@@ -44,3 +42,9 @@ typedef enum {
 
 @end
 
+@interface NSConstantString: NSString {
+  char *c_string;
+  unsigned int len;
+}
+
+@end

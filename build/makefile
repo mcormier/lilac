@@ -8,37 +8,39 @@ objects = NSString.o NSConstantString.o test.o NSObject.o NSArray.o NSStringCF.o
 INCLUDES=-I/cygdrive/c/Dev/usr/include
 DLL_LIB_DIR=-L/cygdrive/c/Dev/usr/lib 
 LIBS=$(DLL_LIB_DIR) -lCoreFoundation -lpthread -lobjc -lm
-OPTS=-mno-cygwin -Wno-import -fconstant-string-class=NSConstantString
+
+COMPILEOPTS=-Wno-import -fconstant-string-class=NSConstantString
+LINKOPTS=-mno-cygwin -fconstant-string-class=NSConstantString
 
 LINK= gcc $(LIBS) -o
-COMPILE= gcc $(INCLUDES) -c $(OPTS)
+COMPILE= gcc $(INCLUDES) -c $(COMPILEOPTS)
 
 
-vpath %.m ../src
-vpath %.h ../src
+vpath %.m ../src:../src/cocoaLite
+vpath %.h ../src:../src/cocoaLite
 
 
 test : $(objects)
-		$(LINK) test $(OPTS) $(objects) -lobjc
+		$(LINK) test $(LINKOPTS) $(objects) -lobjc
 
 
 test.o : test.m
 		$(COMPILE) ../src/test.m 
 
 NSObject.o : NSObject.h NSObject.m
-		$(COMPILE) ../src/NSObject.m 
+		$(COMPILE) ../src/cocoaLite/NSObject.m 
 
 NSArray.o : NSArray.h NSArray.m
-		$(COMPILE) ../src/NSArray.m 
+		$(COMPILE) ../src/cocoaLite/NSArray.m 
 
 NSConstantString.o : NSConstantString.h NSConstantString.m
-		$(COMPILE) ../src/NSConstantString.m 
+		$(COMPILE) ../src/cocoaLite/NSConstantString.m 
 
 NSString.o : NSString.h NSString.m
-		$(COMPILE) ../src/NSString.m 
+		$(COMPILE) ../src/cocoaLite/NSString.m 
 
 NSStringCF.o : NSStringCF.h NSStringCF.m
-		$(COMPILE) ../src/NSStringCF.m 
+		$(COMPILE) ../src/cocoaLite/NSStringCF.m 
 
 .PHONY : clean
 clean :

@@ -1,5 +1,4 @@
 #import <objc/Object.h>
-#import "CFLite.h"
 
 @interface NSObject : Object {
 }

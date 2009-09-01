@@ -1,6 +1,5 @@
-#import <objc/Object.h>
-#import "Lilac.h"
 #import "NSString.h"
+#import "NSObjCRuntime.h"
 
 @class NSArray;
 

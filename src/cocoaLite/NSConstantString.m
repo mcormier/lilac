@@ -1,4 +1,4 @@
-#import "NSConstantString.h"
+#import "NSString.h"
 
 @implementation NSConstantString
 

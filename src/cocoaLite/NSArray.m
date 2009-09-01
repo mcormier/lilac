@@ -11,7 +11,6 @@
 
 }
 
-// TODO -- check self init properly
 - (id)initWithObjects:(const id *)objects count:(NSUInteger)count {
   if ( [self init] ) {
     const void **values = (const void **)objects;

@@ -1,3 +1,4 @@
+
 // TODO -- figure out why....
 #if defined(__CYGWIN__)
     //CYGWIN gives annoying warning about runtime stuff if we don't do this
@@ -7,4 +8,5 @@
 #endif
 
 #import <CoreFoundation/CoreFoundation.h>
-
+    typedef int           NSInteger;
+    typedef unsigned int  NSUInteger;
