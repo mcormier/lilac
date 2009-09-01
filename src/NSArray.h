@@ -1,4 +1,6 @@
 #import <objc/Object.h>
+
+#import "Lilac.h"
 #import "CFLite.h"
 #import "NSObject.h"
 
@@ -6,6 +8,9 @@
   CFArrayRef value;  
 }
 
-- (id)initWithCFArray:(CFArrayRef) arrayRef;
-- (unsigned int)count;
+- (id)initWithObjects:(const id *)objects count:(NSUInteger)count;
+- (NSUInteger)count;
+- (id)objectAtIndex:(NSUInteger)index;
+
+
 @end
