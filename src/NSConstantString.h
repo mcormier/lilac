@@ -7,7 +7,7 @@
 // Extending NSString appears to change the signature
 // and this doesn't work.
 
-@interface NSConstantString: TestObj {
+@interface NSConstantString: NSString {
   char *c_string;
   unsigned int len;
 }

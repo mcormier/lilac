@@ -7,4 +7,5 @@
 -(void)dealloc;
 -(oneway void)release;
 
++(Class)class; 
 @end

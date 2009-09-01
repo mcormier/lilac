@@ -32,7 +32,6 @@ typedef enum {
 } NSStringEncoding;
 
 @interface NSString : NSObject {
-  CFStringRef value; 
 }
 
 -(const char *) cString;

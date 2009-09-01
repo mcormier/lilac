@@ -1,8 +1,17 @@
 #import "NSString.h"
 #import "NSArray.h"
+#import "NSStringCF.h"
 
 @implementation NSString
 
+// NSString is a stub class that creates another class
+// that extends NSString.  We need to do this
+// so that the variable signature does not interfere
+// with NSConstantString which allows us to use @"blah"
+// to construct strings.
++ (id)alloc {
+  return (id)class_create_instance([NSStringCF class]); 
+}
 
 - (id)init {
 
@@ -14,29 +23,28 @@
 }
 
 - (id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
-
+  printf( "This method should not be called \n");
   if ( [self init] ) {
-    value = CFStringCreateWithCString(NULL, nullTerminatedCString, encoding);
   } 
 
   return self;
 }
 
 -(void)print {
-   // Add one extra character for null termination
-   CFIndex strLen = CFStringGetLength(value) + 1;
-   char cString[strLen];
-   Boolean success = CFStringGetCString(value, cString, strLen, kCFStringEncodingWindowsLatin1);
-   // TODO -- check success value.
-   printf( "The value is : %s \n", cString );
+   printf( "This method should not be called \n");
 }
 
 - (NSArray *)componentsSeparatedByString:(NSString *)separator {
-  CFArrayRef array = CFStringCreateArrayBySeparatingStrings(NULL, value, separator->value); 
-  NSUInteger arySz = CFArrayGetCount(array); 
+  // TODO -- encoding is hardcoded
+  CFStringRef otherValue = CFStringCreateWithCString(NULL, [separator cString], NSISOLatin1StringEncoding);
+  CFStringRef thisValue = CFStringCreateWithCString(NULL, [self cString], NSISOLatin1StringEncoding);
+
+  // TODO -- do we need to release otherValue?
+  CFArrayRef array = CFStringCreateArrayBySeparatingStrings(NULL, thisValue, otherValue);
+  NSUInteger arySz = CFArrayGetCount(array);
 
   if ( array ) {
-    NSString *strings[arySz]; 
+    NSString *strings[arySz];
 
     NSInteger i;
     for ( i = 0; i < arySz ; i++ ) {
@@ -49,21 +57,24 @@
       strings[i] = [[NSString alloc] initWithCString: cString encoding:NSISOLatin1StringEncoding];
     }
 
-    NSArray *toReturn = [[NSArray alloc] initWithObjects:strings count:arySz];
-    // TODO -- autoRelease
-    return toReturn;
-  } 
+  NSArray *toReturn = [[NSArray alloc] initWithObjects:strings count:arySz];
+  // TODO -- autoRelease
+  return toReturn;
+  }
 
   return NULL;
+
 }
 
 
 -(const char *) cString {
+  printf( "This method should not be called \n");
   return "";
 }
 
 -(NSUInteger) length {
-  return CFStringGetLength(value);
+  printf( "This method should not be called \n");
+  return 0;
 }
 
 @end

@@ -3,7 +3,7 @@
 # http://www.gnu.org/software/make/manual/make.html
 #
 
-objects = NSString.o NSConstantString.o test.o NSObject.o NSArray.o TestObj.o
+objects = NSString.o NSConstantString.o test.o NSObject.o NSArray.o TestObj.o NSStringCF.o
 
 INCLUDES=-I/cygdrive/c/Dev/usr/include
 DLL_LIB_DIR=-L/cygdrive/c/Dev/usr/lib 
@@ -36,6 +36,10 @@ NSConstantString.o : NSConstantString.h NSConstantString.m
 
 NSString.o : NSString.h NSString.m
 		$(COMPILE) ../src/NSString.m 
+
+NSStringCF.o : NSStringCF.h NSStringCF.m
+		$(COMPILE) ../src/NSStringCF.m 
+
 
 TestObj.o : TestObj.h TestObj.m
 		$(COMPILE) ../src/TestObj.m 

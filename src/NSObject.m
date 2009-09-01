@@ -11,4 +11,8 @@
 -(void)dealloc {
 }
 
+
++(Class)class {
+   return self;
+}
 @end
