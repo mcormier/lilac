@@ -2,29 +2,14 @@
 
 @implementation NSConstantString
 
--copy {
-   return self;
-}
+-(const char *) cString
+{
+  return (c_string);
+} /* -cString */
 
--retain {
-   return self;
-}
-
--(void)release {
-}
-
--autorelease {
-   return self;
-}
-
--(void)dealloc {
-   return;
-   [super dealloc];
-}
-
-
--(void)print {
-  printf("Constant String implementation with length of %i \n", len);
-}
+-(unsigned int) length
+{
+  return (len);
+} /* -length */
 
 @end
