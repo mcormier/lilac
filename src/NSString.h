@@ -1,4 +1,5 @@
 #import <objc/Object.h>
+#import "Lilac.h"
 #import "CFLite.h"
 #import "NSObject.h"
 
@@ -35,7 +36,7 @@ typedef enum {
 }
 
 -(const char *) cString;
--(unsigned int) length;
+-(NSUInteger) length;
 
 -(id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
 - (NSArray *)componentsSeparatedByString:(NSString *)separator;
