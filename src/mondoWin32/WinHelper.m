@@ -29,14 +29,10 @@ static NSString* defaultBrowser =  @"C:\\Program Files\\Internet Explorer\\iexpl
    regerr = RegQueryValueEx (regPtr,"", 0, &regtype, (LPBYTE) buffer, &size);
    if (regerr != ERROR_SUCCESS) { free(buffer); return defaultBrowser; }
 
-   // TODO -- check for leaks
    NSString *regValue = [[NSString alloc] initWithCString: buffer encoding:NSISOLatin1StringEncoding];
+   free(buffer); 
    NSArray *array = [regValue componentsSeparatedByString:@"\""]; 
 
-   printf("What is in the buffer %s \n", buffer);
-//   free( buffer); 
-
-   printf("Array count is %i \n", [array count]);
    if ( [array count] >= 2 ) {
      return (NSString*) [array objectAtIndex:1];
    }

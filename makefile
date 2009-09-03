@@ -1,6 +1,6 @@
 .PHONY : test
-test :
-		cd build ; make test
+main :
+		cd build ; make main
 
 .PHONY : clean
 clean :

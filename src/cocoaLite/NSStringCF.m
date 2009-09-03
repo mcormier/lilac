@@ -14,8 +14,12 @@
 
 - (id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding {
   if ( [self init] ) {
+    // TODO -- dealloc string in dealloc method
+    NSInteger strLen = strlen(nullTerminatedCString);
+    c_string = (char *) malloc (strLen + 1);
+    strcpy( c_string, nullTerminatedCString );
+
     value = CFStringCreateWithCString(NULL, nullTerminatedCString, encoding);
-    c_string = (char *)nullTerminatedCString;
   }
 
   return self;
@@ -27,7 +31,7 @@
    char cString[strLen];
    Boolean success = CFStringGetCString(value, cString, strLen, kCFStringEncodingWindowsLatin1);
    // TODO -- check success value.
-   printf( "The value is : %s \n", cString );
+   printf( "%s ", cString );
 }
 
 

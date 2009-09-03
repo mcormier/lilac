@@ -1,12 +1,6 @@
-// TODO -- figure out why....
-#if defined(__CYGWIN__)
-    //CYGWIN gives annoying warning about runtime stuff if we don't do this
-  #define USE_SYS_TYPES_FD_SET
-  #include <sys/types.h>
+#import <cocoaLite/Cocoa.h>
 
-#endif
-
-#include <CoreFoundation/CoreFoundation.h>
+#import "mondoWin32/WinHelper.h"
 
 void readPropertyListFromFile( char* weblocFilename ); 
 void openURLinBrowser( char* url );
@@ -21,13 +15,15 @@ int main ( int argc, const char * argv[] ) {
 
     logFile = fopen("testlog", "w");
 
-    fprintf(logFile, "Number of arguments is %i\n", argc);
+    printf( "Number of arguments is %i\n", argc);
     if ( argc > 1 ) {
       fprintf(logFile, "Second arg is %s\n", argv[1]);
       // Read the plist.
       readPropertyListFromFile((char*)argv[1]); 
     }
- 
+
+    NSString* browserPath = [WinHelper defaultBrowserPath];    
+    printf("The default browser path is %s \n", [browserPath cString] );
     return 0;
 }
 

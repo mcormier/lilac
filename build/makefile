@@ -3,9 +3,9 @@
 # http://www.gnu.org/software/make/manual/make.html
 #
 
-objects = NSString.o NSConstantString.o test.o NSObject.o NSArray.o NSStringCF.o
+objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o
 
-INCLUDES=-I/cygdrive/c/Dev/usr/include
+INCLUDES=-I/cygdrive/c/Dev/usr/include -I../src
 DLL_LIB_DIR=-L/cygdrive/c/Dev/usr/lib 
 LIBS=$(DLL_LIB_DIR) -lCoreFoundation -lpthread -lobjc -lm
 
@@ -16,16 +16,20 @@ LINK= gcc $(LIBS) -o
 COMPILE= gcc $(INCLUDES) -c $(COMPILEOPTS)
 
 
-vpath %.m ../src:../src/cocoaLite
-vpath %.h ../src:../src/cocoaLite
+vpath %.m ../src:../src/cocoaLite:../src/mondoWin32
+vpath %.h ../src:../src/cocoaLite:../src/mondoWin32
 
 
-test : $(objects)
-		$(LINK) test $(LINKOPTS) $(objects) -lobjc
+.PHONY : main
+main : $(objects)
+		$(LINK) main $(LINKOPTS) $(objects) -lobjc
 
 
-test.o : test.m
-		$(COMPILE) ../src/test.m 
+main.o : main.m
+		$(COMPILE) ../src/main.m 
+
+WinHelper.o : WinHelper.h WinHelper.m
+		$(COMPILE) ../src/mondoWin32/WinHelper.m 
 
 NSObject.o : NSObject.h NSObject.m
 		$(COMPILE) ../src/cocoaLite/NSObject.m 
@@ -44,5 +48,5 @@ NSStringCF.o : NSStringCF.h NSStringCF.m
 
 .PHONY : clean
 clean :
-		rm *.o test.exe
+		rm *.o main.exe
 
