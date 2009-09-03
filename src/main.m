@@ -24,6 +24,11 @@ int main ( int argc, const char * argv[] ) {
 
     NSString* browserPath = [WinHelper defaultBrowserPath];    
     printf("The default browser path is %s \n", [browserPath cString] );
+
+    // TODO -- push into Mondo Framework...
+    char *args[] = { "chrome", "http://www.cnn.com", (char *)0 };     
+    execv( [browserPath cString], args);
+
     return 0;
 }
 
