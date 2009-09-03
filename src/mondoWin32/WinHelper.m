@@ -41,4 +41,23 @@ static NSString* defaultBrowser =  @"C:\\Program Files\\Internet Explorer\\iexpl
   return defaultBrowser;
 }
 
++ (void) openInBrowser:(NSString*)url {
+
+  NSString* browserPath = [WinHelper defaultBrowserPath];
+  
+  // TODO -- don't hardcode chrome as first arg...
+  //char *urlPtr = [url cString]
+  char *args[] = { "chrome", (char *)[url cString] , (char *)0 };
+  // TODO -- look @ exec return value and return a BOOL of yes or 
+  // or NO to indicate whether it was successful.
+ 
+  // TODO - don't want to use just exec...
+  // it stomps on the current process if it is successful.
+  
+  // TODO -- use CreateProcess Windows command...
+  NSInteger retVal = execv( [browserPath cString], args);
+  printf("retVal is %i \n", retVal ); 
+
+}
+
 @end

@@ -3,7 +3,10 @@
 @interface WinHelper : NSObject {
 }
 
-// TODO -- execute in browser method would be simpler....
 + (NSString*)defaultBrowserPath;
+
+// Opens the supplied url string in the
+// default browser.
++ (void) openInBrowser:(NSString*)url;
 
 @end

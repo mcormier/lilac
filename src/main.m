@@ -22,13 +22,8 @@ int main ( int argc, const char * argv[] ) {
       readPropertyListFromFile((char*)argv[1]); 
     }
 
-    NSString* browserPath = [WinHelper defaultBrowserPath];    
-    printf("The default browser path is %s \n", [browserPath cString] );
-
-    // TODO -- push into Mondo Framework...
-    char *args[] = { "chrome", "http://www.cnn.com", (char *)0 };     
-    execv( [browserPath cString], args);
-
+    [WinHelper openInBrowser:@"http://www.cs.dal.ca"];
+    printf("HERE \n");
     return 0;
 }
 
