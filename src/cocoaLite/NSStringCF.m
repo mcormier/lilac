@@ -27,11 +27,11 @@
 
 -(void)print {
    // Add one extra character for null termination
-   CFIndex strLen = CFStringGetLength(value) + 1;
+   CFIndex strLen = [self length] + 1;
    char cString[strLen];
    Boolean success = CFStringGetCString(value, cString, strLen, kCFStringEncodingWindowsLatin1);
    // TODO -- check success value.
-   printf( "%s ", cString );
+   printf( "%s \n", cString );
 }
 
 

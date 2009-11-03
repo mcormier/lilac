@@ -7,6 +7,10 @@
 
 // Opens the supplied url string in the
 // default browser.
-+ (void) openInBrowser:(NSString*)url;
++ (BOOL) openInBrowser:(NSString*)url;
+
+// The commandLine includes an executable name and then the arguments to that executable
+// i.e. blah.exe arg1 arg2
++ (BOOL) runExecutable:(NSString*)fullEXEPathName withCommandLine:(NSString*)args;
 
 @end

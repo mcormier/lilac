@@ -5,11 +5,15 @@
 -(const char *) cString
 {
   return (c_string);
-} /* -cString */
+} 
 
 -(unsigned int) length
 {
   return (len);
-} /* -length */
+} 
+
+-(void)print {
+	printf("%s\n", c_string);
+}
 
 @end

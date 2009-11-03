@@ -25,6 +25,7 @@
 }
  
 - (id)objectAtIndex:(NSUInteger)index {
+  // TODO -- throw an index out of bound exception if out of range.
   CFIndex idx = index;
    
   return (id)CFArrayGetValueAtIndex(value, idx);

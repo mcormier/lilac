@@ -37,7 +37,7 @@ NSObject.o : NSObject.h NSObject.m
 NSArray.o : NSArray.h NSArray.m
 		$(COMPILE) ../src/cocoaLite/NSArray.m 
 
-NSConstantString.o : NSConstantString.h NSConstantString.m
+NSConstantString.o : NSString.h NSConstantString.m
 		$(COMPILE) ../src/cocoaLite/NSConstantString.m 
 
 NSString.o : NSString.h NSString.m

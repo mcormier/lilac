@@ -29,7 +29,8 @@ static NSString* defaultBrowser =  @"C:\\Program Files\\Internet Explorer\\iexpl
    regerr = RegQueryValueEx (regPtr,"", 0, &regtype, (LPBYTE) buffer, &size);
    if (regerr != ERROR_SUCCESS) { free(buffer); return defaultBrowser; }
 
-   NSString *regValue = [[NSString alloc] initWithCString: buffer encoding:NSISOLatin1StringEncoding];
+   NSString *regValue = [[NSString alloc] initWithCString: buffer 
+                                                 encoding:NSISOLatin1StringEncoding];
    free(buffer); 
    NSArray *array = [regValue componentsSeparatedByString:@"\""]; 
 
@@ -41,23 +42,39 @@ static NSString* defaultBrowser =  @"C:\\Program Files\\Internet Explorer\\iexpl
   return defaultBrowser;
 }
 
-+ (void) openInBrowser:(NSString*)url {
+// Windows is an example on how not to design an API.  10 arguments for CreateProcess, Ugh.
++ (BOOL) runExecutable:(NSString*)fullEXEPathName withCommandLine:(NSString*)commandLine {
+  PROCESS_INFORMATION pi;
+  STARTUPINFO si;
+  
+  memset(&si,0,sizeof(si));
+  si.cb= sizeof(si);
+  
+  LPCSTR applicationName = [fullEXEPathName cString];
+  LPSTR commandArg = (char *)[commandLine cString];
+  
+  
+  return  CreateProcess ( applicationName , commandArg, 
+                 NULL, NULL, FALSE, 0, NULL, NULL, 
+                 &si, &pi );
+}
+
++ (BOOL) openInBrowser:(NSString*)url {
 
   NSString* browserPath = [WinHelper defaultBrowserPath];
   
-  // TODO -- don't hardcode chrome as first arg...
-  //char *urlPtr = [url cString]
-  char *args[] = { "chrome", (char *)[url cString] , (char *)0 };
-  // TODO -- look @ exec return value and return a BOOL of yes or 
-  // or NO to indicate whether it was successful.
+  NSString* exeName = @"testing.exe ";
+  NSString* commandLine = [exeName stringByAppendingString:url];
  
-  // TODO - don't want to use just exec...
-  // it stomps on the current process if it is successful.
+  [browserPath print];
   
-  // TODO -- use CreateProcess Windows command...
-  NSInteger retVal = execv( [browserPath cString], args);
-  printf("retVal is %i \n", retVal ); 
-
+  NSArray *brokenString = [browserPath componentsSeparatedByString:@"\\"];
+  printf("Size of array %i \n", [brokenString count]);
+  NSString *exe = [brokenString objectAtIndex:[brokenString count]-1];
+  [exe print];
+  return NO;
+  //return [ WinHelper runExecutable:browserPath withCommandLine:commandLine];
+ 
 }
 
 @end

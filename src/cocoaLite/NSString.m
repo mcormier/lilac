@@ -30,18 +30,37 @@
   return self;
 }
 
+
+
+-(id)initWithFormat:(NSString *)format arguments:(va_list)arguments {
+   //return [self initWithFormat:format locale:nil arguments:arguments];
+   return NULL;
+}
+
+-(id)initWithFormat:(NSString *)format, ... {
+   va_list arguments;
+
+   va_start(arguments,format);
+   id result=[self initWithFormat:format arguments:arguments];
+   va_end(arguments);
+
+   return result;
+}
+
 -(void)print {
    printf( "This method should not be called \n");
 }
 
+
 - (NSArray *)componentsSeparatedByString:(NSString *)separator {
-  // TODO -- encoding is hardcoded
   CFStringRef otherValue = CFStringCreateWithCString(NULL, [separator cString], NSISOLatin1StringEncoding);
   CFStringRef thisValue = CFStringCreateWithCString(NULL, [self cString], NSISOLatin1StringEncoding);
 
   // TODO -- do we need to release otherValue?
   CFArrayRef array = CFStringCreateArrayBySeparatingStrings(NULL, thisValue, otherValue);
   NSUInteger arySz = CFArrayGetCount(array);
+  CFRelease(otherValue);
+  CFRelease(thisValue);
 
   if ( array ) {
     NSString *strings[arySz];
@@ -58,6 +77,7 @@
     }
 
   NSArray *toReturn = [[NSArray alloc] initWithObjects:strings count:arySz];
+  CFRelease(array);
   // TODO -- autoRelease
   return toReturn;
   }
@@ -66,6 +86,32 @@
 
 }
 
+
+- (NSString *)stringByAppendingString:(NSString *)aString {
+  NSStringEncoding encoding = NSISOLatin1StringEncoding;
+  CFStringRef firstString = CFStringCreateWithCString(NULL, [self cString], encoding);
+  CFStringRef secondString = CFStringCreateWithCString(NULL, [aString cString], encoding);
+  
+  // Combine the strings using a mutable string
+  CFMutableStringRef mutString = CFStringCreateMutableCopy(NULL, 0, firstString);
+  CFStringAppend(mutString, secondString);
+  CFRelease( firstString );
+  CFRelease( secondString ); 
+
+  // Get the cString version of the mutable string
+  CFIndex strLen = CFStringGetLength(mutString) + 1;
+  char cString[strLen];
+  Boolean success = CFStringGetCString(mutString, cString, strLen, encoding);
+  
+  // Create the NSString
+  NSString *appendedString = NULL;
+  if (success) {
+    appendedString  = [[NSString alloc] initWithCString:cString encoding:encoding];
+  }
+  CFRelease(mutString);
+
+  return appendedString;
+}
 
 -(const char *) cString {
   printf( "This method should not be called \n");
