@@ -3,7 +3,19 @@
 # http://www.gnu.org/software/make/manual/make.html
 #
 
-objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o
+
+
+# The following two lines force the standard make to recognize the 
+# Objective-C .m suffix.
+.SUFFIXES: .o .m
+.m.o: ; $(COMPILE) $<
+
+
+#objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o NSStringFormatter.o
+objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o NSZone.o
+
+CC = gcc
+CFLAGS = -g
 
 INCLUDES=-I/cygdrive/c/Dev/usr/include -I../src
 DLL_LIB_DIR=-L/cygdrive/c/Dev/usr/lib 
@@ -15,9 +27,9 @@ LINKOPTS=-mno-cygwin -fconstant-string-class=NSConstantString
 LINK= gcc $(LIBS) -o
 COMPILE= gcc $(INCLUDES) -c $(COMPILEOPTS)
 
+vpath %.m ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:../src/cocoaLite/NSZone
+vpath %.h ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:../src/cocoaLite/NSZone
 
-vpath %.m ../src:../src/cocoaLite:../src/mondoWin32
-vpath %.h ../src:../src/cocoaLite:../src/mondoWin32
 
 
 .PHONY : main
@@ -26,25 +38,22 @@ main : $(objects)
 
 
 main.o : main.m
-		$(COMPILE) ../src/main.m 
 
 WinHelper.o : WinHelper.h WinHelper.m
-		$(COMPILE) ../src/mondoWin32/WinHelper.m 
 
+#####################
+# Make CocoaLite
+#####################
 NSObject.o : NSObject.h NSObject.m
-		$(COMPILE) ../src/cocoaLite/NSObject.m 
-
 NSArray.o : NSArray.h NSArray.m
-		$(COMPILE) ../src/cocoaLite/NSArray.m 
-
 NSConstantString.o : NSString.h NSConstantString.m
-		$(COMPILE) ../src/cocoaLite/NSConstantString.m 
-
 NSString.o : NSString.h NSString.m
-		$(COMPILE) ../src/cocoaLite/NSString.m 
-
 NSStringCF.o : NSStringCF.h NSStringCF.m
-		$(COMPILE) ../src/cocoaLite/NSStringCF.m 
+NSZone.o :  NSZone.m NSZone.h NSVirtualMemory.m
+
+#NSStringFormatter.o : NSStringFormatter.h NSStringFormatter.m
+
+
 
 .PHONY : clean
 clean :
