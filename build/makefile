@@ -12,6 +12,7 @@
 
 objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o 
 
+EXENAME=lilac
 CC = gcc
 CFLAGS = -g
 
@@ -32,7 +33,7 @@ vpath %.h ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:..
 
 .PHONY : main
 main : $(objects)
-		$(LINK) lilac $(LINKOPTS) $(objects) -lobjc
+		$(LINK) $(EXENAME) $(LINKOPTS) $(objects) -lobjc
 
 
 main.o : main.m
@@ -52,5 +53,5 @@ NSStringCF.o : NSStringCF.h NSStringCF.m
 
 .PHONY : clean
 clean :
-		rm *.o main.exe
+		rm *.o $(EXENAME).exe
 
