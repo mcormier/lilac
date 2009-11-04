@@ -5,3 +5,7 @@ main :
 .PHONY : clean
 clean :
 		cd build ; make clean
+
+.PHONY : package
+package :
+		cd build ; make package

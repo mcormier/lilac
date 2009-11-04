@@ -13,6 +13,7 @@
 objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o 
 
 EXENAME=lilac
+PKGDIR=../pkg
 CC = gcc
 CFLAGS = -g
 
@@ -26,8 +27,8 @@ LINKOPTS=-mno-cygwin -fconstant-string-class=NSConstantString
 LINK= gcc $(LIBS) -o
 COMPILE= gcc $(INCLUDES) -c $(COMPILEOPTS)
 
-vpath %.m ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:../src/cocoaLite/NSZone
-vpath %.h ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:../src/cocoaLite/NSZone
+vpath %.m ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString
+vpath %.h ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString
 
 
 
@@ -54,4 +55,10 @@ NSStringCF.o : NSStringCF.h NSStringCF.m
 .PHONY : clean
 clean :
 		rm *.o $(EXENAME).exe
+		rm -rf $(PKGDIR)
 
+
+.PHONY : package
+package :
+		cp *.dll $(PKGDIR)
+		cp $(EXENAME).exe $(PKGDIR)
