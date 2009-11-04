@@ -1,6 +1,6 @@
 #import <cocoaLite/Cocoa.h>
 
-#import "mondoWin32/WinHelper.h"
+#import <mondoWin32/WinHelper.h>
 
 void readPropertyListFromFile( char* weblocFilename ); 
 
