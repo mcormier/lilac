@@ -62,19 +62,64 @@ static NSString* defaultBrowser =  @"C:\\Program Files\\Internet Explorer\\iexpl
 + (BOOL) openInBrowser:(NSString*)url {
 
   NSString* browserPath = [WinHelper defaultBrowserPath];
-  
-  NSString* exeName = @"testing.exe ";
-  NSString* commandLine = [exeName stringByAppendingString:url];
- 
-  [browserPath print];
-  
+
   NSArray *brokenString = [browserPath componentsSeparatedByString:@"\\"];
-  printf("Size of array %i \n", [brokenString count]);
   NSString *exe = [brokenString objectAtIndex:[brokenString count]-1];
-  [exe print];
-  return NO;
-  //return [ WinHelper runExecutable:browserPath withCommandLine:commandLine];
- 
+
+  // TODO -- this is leaky, replace with initWithFormat when available
+  NSString* commandLine = [exe stringByAppendingString:[@" " stringByAppendingString:url]]; 
+
+  return [ WinHelper runExecutable:browserPath withCommandLine:commandLine];
+}
+
+
++ (NSString*)getURLFromWeblocFile:(NSString*)weblocFilename {
+
+  CFDataRef data = NULL;
+  NSString* urlString;
+
+  FILE *file = fopen( [weblocFilename cString], "r" );
+
+  if ( file != NULL ) {
+       int result = fseek( file, 0, SEEK_END );
+       result = ftell( file );
+       rewind( file );
+
+       char * buffer = ( char * )calloc( 1, result );
+
+       if ( buffer != NULL ) {
+           if ( fread( buffer, result, 1, file ) > 0 ) {
+               data = CFDataCreate( NULL, buffer, result );
+           }
+
+           free( buffer );
+       }
+
+       fclose( file );
+   }
+
+   if ( data != NULL ) {
+       CFPropertyListRef propertyList = CFPropertyListCreateFromXMLData( NULL, data,
+           kCFPropertyListImmutable, NULL );
+
+
+       CFTypeID typeID = CFGetTypeID(propertyList);
+       if ( typeID == CFDictionaryGetTypeID() ) {
+         CFDictionaryRef dict = (CFDictionaryRef)propertyList;
+         CFStringRef value = CFDictionaryGetValue(dict, CFSTR( "URL" ) );
+         if (value != NULL ) {
+            char url[2048];
+            Boolean success = CFStringGetCString(value, url, 2048, kCFStringEncodingWindowsLatin1);
+            if (success) {
+              urlString = [[NSString alloc] initWithCString:url encoding:NSISOLatin1StringEncoding];
+            }
+         }
+       }
+   }
+
+   CFRelease( data );
+
+  return urlString;
 }
 
 @end

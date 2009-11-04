@@ -13,4 +13,6 @@
 // i.e. blah.exe arg1 arg2
 + (BOOL) runExecutable:(NSString*)fullEXEPathName withCommandLine:(NSString*)args;
 
++ (NSString*)getURLFromWeblocFile:(NSString*)weblocFilename;
+
 @end
