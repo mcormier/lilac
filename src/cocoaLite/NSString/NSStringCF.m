@@ -26,15 +26,6 @@
   return self;
 }
 
--(void)print {
-   // Add one extra character for null termination
-   CFIndex strLen = [self length] + 1;
-   char cString[strLen];
-   Boolean success = CFStringGetCString(value, cString, strLen, kCFStringEncodingWindowsLatin1);
-   // TODO -- check success value.
-   printf( "%s \n", cString );
-}
-
 
 -(const char *) cString {
   return (c_string);

@@ -46,10 +46,6 @@ typedef enum {
 -(void)getCharacters:(unichar *)buffer;
 
 
-// TODO -- conveninece method ... remove
--(void)print;
-
-
 
 @end
 

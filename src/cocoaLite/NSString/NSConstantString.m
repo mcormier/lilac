@@ -12,8 +12,4 @@
   return (len);
 } 
 
--(void)print {
-	printf("%s\n", c_string);
-}
-
 @end

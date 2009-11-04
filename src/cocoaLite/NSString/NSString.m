@@ -37,10 +37,6 @@
    printf( "This method should not be called \n");
 }
 
--(void)print {
-   printf( "This method should not be called \n");
-}
-
 
 - (NSArray *)componentsSeparatedByString:(NSString *)separator {
   CFStringRef otherValue = CFStringCreateWithCString(NULL, [separator cString], NSISOLatin1StringEncoding);
