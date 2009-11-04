@@ -1,6 +1,8 @@
 #import "NSObject.h"
 #import "NSObjCRuntime.h"
 
+typedef uint16_t unichar;
+
 @class NSArray;
 
 typedef enum {
@@ -42,6 +44,11 @@ typedef enum {
 -(NSArray *)componentsSeparatedByString:(NSString *)separator;
 -(NSString *)stringByAppendingString:(NSString *)aString;
 
+
+-(void)getCharacters:(unichar *)buffer;
+
+
+// TODO -- conveninece method ... remove
 -(void)print;
 
 
