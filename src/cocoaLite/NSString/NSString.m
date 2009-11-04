@@ -33,24 +33,6 @@
 
 
 
--(id)initWithFormat:(NSString *)format arguments:(va_list)arguments {
-  
-   // TODO -- call NSStringNewWithFormat(format,locale,arguments,NULL); from impl classes.
-  
-   //return [self initWithFormat:format locale:nil arguments:arguments];
-   return NULL;
-}
-
--(id)initWithFormat:(NSString *)format, ... {
-   va_list arguments;
-
-   va_start(arguments,format);
-   id result=[self initWithFormat:format arguments:arguments];
-   va_end(arguments);
-
-   return result;
-}
-
 -(void)getCharacters:(unichar *)buffer {
    printf( "This method should not be called \n");
 }
@@ -64,7 +46,6 @@
   CFStringRef otherValue = CFStringCreateWithCString(NULL, [separator cString], NSISOLatin1StringEncoding);
   CFStringRef thisValue = CFStringCreateWithCString(NULL, [self cString], NSISOLatin1StringEncoding);
 
-  // TODO -- do we need to release otherValue?
   CFArrayRef array = CFStringCreateArrayBySeparatingStrings(NULL, thisValue, otherValue);
   NSUInteger arySz = CFArrayGetCount(array);
   CFRelease(otherValue);

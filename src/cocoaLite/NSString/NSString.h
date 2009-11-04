@@ -38,8 +38,6 @@ typedef enum {
 -(NSUInteger) length;
 
 -(id)initWithCString:(const char *)nullTerminatedCString encoding:(NSStringEncoding)encoding;
--(id)initWithFormat:(NSString *)format, ...;
--(id)initWithFormat:(NSString *)format arguments:(va_list)arguments;
 
 -(NSArray *)componentsSeparatedByString:(NSString *)separator;
 -(NSString *)stringByAppendingString:(NSString *)aString;
