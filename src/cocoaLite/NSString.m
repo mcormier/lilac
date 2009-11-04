@@ -33,6 +33,9 @@
 
 
 -(id)initWithFormat:(NSString *)format arguments:(va_list)arguments {
+  
+   // TODO -- call NSStringNewWithFormat(format,locale,arguments,NULL); from impl classes.
+  
    //return [self initWithFormat:format locale:nil arguments:arguments];
    return NULL;
 }
@@ -45,6 +48,10 @@
    va_end(arguments);
 
    return result;
+}
+
+-(void)getCharacters:(unichar *)buffer {
+   printf( "This method should not be called \n");
 }
 
 -(void)print {
