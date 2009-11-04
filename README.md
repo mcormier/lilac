@@ -1,11 +1,11 @@
 
-Experimenting with Core Foundation and Objective C 
-on Windoze.
+Experiment with Core Foundation, Objective-C and Windows
 
-This project will eventually create an exe on windows that
-can be used open a .webloc file in the default Windows by double clicking on 
-it.
+This project creates a Windows exe that opens a .webloc.
+It finds the URL property and then opens the URL in the 
+default browser.
 
+To build this project you must use cygwin.
 
 
 
