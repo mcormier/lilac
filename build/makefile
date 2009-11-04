@@ -32,7 +32,7 @@ vpath %.h ../src:../src/cocoaLite:../src/mondoWin32:../src/cocoaLite/NSString:..
 
 .PHONY : main
 main : $(objects)
-		$(LINK) main $(LINKOPTS) $(objects) -lobjc
+		$(LINK) lilac $(LINKOPTS) $(objects) -lobjc
 
 
 main.o : main.m
