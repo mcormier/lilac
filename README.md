@@ -1,9 +1,14 @@
+-- Lilac --
+An Experiment with Core Foundation, Objective-C and Windows
 
-Experiment with Core Foundation, Objective-C and Windows
-
-This project creates a Windows exe that opens a .webloc.
-It finds the URL property and then opens the URL in the 
+This project creates a Windows .EXE that opens a .webloc file.
+A .webloc file is generally a binary plist.
+Lilac finds the URL property and then opens the URL in the 
 default browser.
+
+The project was created to start a process of becoming
+comfortable building software with Objective-C on the
+Windows platform. 
 
 To build this project you must use cygwin.
 
