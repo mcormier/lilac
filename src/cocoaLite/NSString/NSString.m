@@ -1,6 +1,7 @@
 #import "NSString.h"
-#import "NSArray.h"
 #import "NSStringCF.h"
+
+#import <cocoaLite/NSArray.h>
 
 @implementation NSString
 

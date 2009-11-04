@@ -1,5 +1,5 @@
-#import "NSObject.h"
-#import "NSObjCRuntime.h"
+#import <cocoaLite/NSObject.h>
+#import <cocoaLite/NSObjCRuntime.h>
 
 typedef uint16_t unichar;
 

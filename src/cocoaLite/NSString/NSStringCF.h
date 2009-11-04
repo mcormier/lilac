@@ -1,5 +1,5 @@
 #import "NSString.h"
-#import "NSObjCRuntime.h"
+#import <cocoaLite/NSObjCRuntime.h>
 
 @class NSArray;
 

@@ -1,5 +1,6 @@
 #import "NSStringCF.h"
-#import "NSArray.h"
+
+#import <cocoaLite/NSArray.h>
 
 @implementation NSStringCF
 

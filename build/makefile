@@ -4,15 +4,13 @@
 #
 
 
-
 # The following two lines force the standard make to recognize the 
 # Objective-C .m suffix.
 .SUFFIXES: .o .m
 .m.o: ; $(COMPILE) $<
 
 
-#objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o NSStringFormatter.o
-objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o NSZone.o
+objects = NSString.o NSConstantString.o main.o NSObject.o NSArray.o NSStringCF.o WinHelper.o 
 
 CC = gcc
 CFLAGS = -g
@@ -49,9 +47,6 @@ NSArray.o : NSArray.h NSArray.m
 NSConstantString.o : NSString.h NSConstantString.m
 NSString.o : NSString.h NSString.m
 NSStringCF.o : NSStringCF.h NSStringCF.m
-NSZone.o :  NSZone.m NSZone.h NSVirtualMemory.m
-
-#NSStringFormatter.o : NSStringFormatter.h NSStringFormatter.m
 
 
 
